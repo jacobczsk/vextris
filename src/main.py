@@ -1,7 +1,10 @@
 from vex import *
-import random, time
+import random, time, sys
 
 # BEGIN definice konstant
+
+DELKA = 200
+PAUZA = 0.3
 
 L_Block = [
     [
@@ -175,8 +178,9 @@ x = 0
 block = 0
 rot = 0
 score = 0
-sleeptorig = 200
+sleeptorig = 1
 sleept = sleeptorig
+end = False
 
 # END definice globalnich promennych
 
@@ -199,19 +203,23 @@ herni_pole.append(radek)
 velikost_bloku = 8
 def vykreslipole():
     """Vykresli staticke bloky (jiz spadle)"""
+    global end
+    if end: return
     for x in range(20):
         for y in range(10):
-           if herni_pole[x][y]:
+            if herni_pole[x][y]:
                 brain.screen.draw_rectangle(x*velikost_bloku,
-                                           (10-y)*velikost_bloku,
-                                           velikost_bloku,
-                                           velikost_bloku
+                                            (10-y)*velikost_bloku,
+                                            velikost_bloku,
+                                            velikost_bloku
                 )
 
 def enum(arr):
     """Nahrada za funkci `enumerate()` pro micropython
 
     Vrati arr (napr. `["a", "b", "c"]`) ve formatu `[(0, "a"), (1, "b"), (2, "c)]`"""
+    global end
+    if end: return
     enumi = 0
     for item in arr:
         yield (enumi, item)
@@ -219,6 +227,8 @@ def enum(arr):
 
 def kolize(blocki, bx, by):
     """Zjisti kolizi blocku `blocki` na souradnicich `bx, by`"""
+    global end
+    if end: return
     for y, radek in enum(blocki):
         for x, bunka in enum(radek):
             try:
@@ -232,6 +242,8 @@ def kolize(blocki, bx, by):
 
 def vykresliblock(x_pos, y_pos, rotace):
     """Vykresli aktualni blok na souradnicich `x_pos, y_pos` s rotaci `rotace`"""
+    global end
+    if end: return
     global i
     global block
     global score
@@ -240,7 +252,7 @@ def vykresliblock(x_pos, y_pos, rotace):
         return
     blok = blok[rotace]
     if kolize(blok, x_pos, y_pos+1):
-        block = random.randint(0, len(BLOCKS)-1)
+        brain.play_sound(SoundType.FILLUP)
         for y, radek in enum(blok):
             for x, bunka in enum(radek):
                 try:
@@ -257,6 +269,7 @@ def vykresliblock(x_pos, y_pos, rotace):
                     herni_pole[idx-g] = herni_pole[idx-g-1]
                 herni_pole[0] = EMPTY
                 score += 1
+                print(str(score))
                 break
 
     for x in range(4):
@@ -273,6 +286,8 @@ def vykresliblock(x_pos, y_pos, rotace):
 
 def genblock():
     """Vygeneruj nahodny blok, pri 100 neuspesnych pokusech ukonci hru"""
+    global end
+    if end: return
     def generate():
         """Generace nahodneho bloku"""
         global x, i, rot, block
@@ -281,18 +296,26 @@ def genblock():
         rot = random.randint(0, 3)
         block = random.randint(0, len(BLOCKS)-1)
 
-    global x, i, rot, block
+    global x, i, rot, block, maint, end
 
     generate()
     counter = 0
     while kolize(BLOCKS[block][rot], x, i): 
         counter += 1
-        if counter == 100:
-            exit()
+        if counter >= 100:
+            end = True
+            brain.play_sound(SoundType.TADA)
+            brain.screen.clear_screen()
+            brain.screen.print("Game over!")
+            brain.screen.render()
+            maint.stop()
+            return
         generate()
 
 def vykresli():
     """Proved vykresleni"""
+    global end
+    if end: return
     vykreslipole()
     vykresliblock(x,i,rot)
     brain.screen.render()
@@ -334,9 +357,33 @@ controller.buttonRDown.released(buttonSlow)
 
 # END events
 
+def playseq(sq: str) -> None:
+    for i, char in enum(sq):
+        lg = DELKA
+        if i % 4 == 3:
+            lg *= 1.5
+        brain.play_note(5,int(char),int(lg))
+    sleep(PAUZA)
+
+def zvuk():
+    "Zvuk"
+    while True:
+        playseq("5430")
+
+        playseq("35403453")
+
+        playseq("534004535430")
+
+        playseq("3540345353400453")
+
 genblock()
 
-while True:
-    sleep(sleept)
-    i += 1
-    vykresli()
+def mainloop():
+    global i
+    while True:
+        sleep(sleept)
+        i += 1
+        vykresli()
+
+zvukt = Thread(zvuk)
+maint = Thread(mainloop)
