@@ -7,9 +7,9 @@ Toto je plněhodnotná hra Tetris na VEXovi IQ. Padající kostky můžete otá�
 ## Jak hrát?
 Ještě před nahráním do robota si prosím spárujte ovladač. Pro funkci hry je zcela zásadní. Hra se ovládá podle následujícího schématu:
 tady dám obrázek
-### Vývoj
+## Vývoj
 Vývoj probíhal od začátku tohoto školního roku v rámci kurzu Robotiky Dětské univerzity TUL. Programovali jsme v jazyce Python ve Visual Studio Code. Využíváme rozšíření VS Code pro VEX. 
 [Návod na instalaci rozšíření zde.](https://honzajdespat.cz)
 Kromě toho je program podrobně popsaný buď v [prezentaci](https://honzajdespat.cz), nebo [závěrečné práci](https://honzajdespat.cz).
 
-#### Otázky a odpovědi
+## Otázky a odpovědi
