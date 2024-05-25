@@ -25,7 +25,7 @@ Můžu ho šířit dál?
 Musím zachovat původní autorské právo a seznam podmínek při redistribuci kódu?
 > Ano, musíte zachovat původní copyright notice, seznam podmínek a disclaimer.
 
-Musím uvést jména autorů?**
+Musím uvést jména autorů?
 > Ano, při redistribuci musíte uvést jména autorů a přispěvatelů.
 
 ## Zdroje:
