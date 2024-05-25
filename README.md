@@ -16,4 +16,18 @@ Vývoj probíhal od začátku tohoto školního roku v rámci kurzu Robotiky Dě
 Kromě toho je program podrobně popsaný buď v [finální prezentaci](https://docs.google.com/presentation/d/1Oy_pq7S5t1xXg2ZcFVbo73niqm-5ld-G/edit?usp=sharing&ouid=115503047459385412371&rtpof=true&sd=true), nebo [závěrečné práci]([https://honzajdespat.cz](https://docs.google.com/document/d/1Ozr1P6YayXe6TESybDNFJsLdt4_KGSk8/edit?usp=sharing&ouid=115503047459385412371&rtpof=true&sd=true)).
 
 ## Otázky k licenci
+Můžu si kód předělat?
+> Ano, můžete kód modifikovat.
 
+Můžu ho šířit dál?
+> Ano, můžete kód šířit ve zdrojové i binární formě.
+
+Musím zachovat původní autorské právo a seznam podmínek při redistribuci kódu?
+> Ano, musíte zachovat původní copyright notice, seznam podmínek a disclaimer.
+
+Musím uvést jména autorů?**
+> Ano, při redistribuci musíte uvést jména autorů a přispěvatelů.
+
+## Zdroje:
+- Kód VEXTris
+- Obrázky Bing AI
