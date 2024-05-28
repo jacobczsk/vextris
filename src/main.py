@@ -362,7 +362,7 @@ def playseq(sq: str) -> None:
         lg = DELKA
         if i % 4 == 3:
             lg *= 1.5
-        brain.play_note(5,0,500)
+        brain.play_note(5,int(char),int(lg))
     sleep(PAUZA)
 
 def zvuk():
