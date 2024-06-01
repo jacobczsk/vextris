@@ -3,8 +3,15 @@ import random, time, sys
 
 # BEGIN definice konstant
 
-DELKA = 200
-PAUZA = 0.3
+short_note = 200
+medium_note = 400
+long_note = 600
+
+short_pause = 100
+medium_pause = 200
+long_pause = 300
+
+octave = 5
 
 L_Block = [
     [
@@ -356,25 +363,56 @@ controller.buttonRDown.pressed(buttonSpeed)
 controller.buttonRDown.released(buttonSlow)
 
 # END events
-
-def playseq(sq: str) -> None:
-    for i, char in enum(sq):
-        lg = DELKA
-        if i % 4 == 3:
-            lg *= 1.5
-        brain.play_note(5,int(char),int(lg))
-    sleep(PAUZA)
-
 def zvuk():
-    "Zvuk"
-    while True:
-        playseq("5430")
 
-        playseq("35403453")
+while True:
+    brain.play_note(octave, 0, short_note)  # c
+    time.sleep(short_pause / 1000)          # Pauza
 
-        playseq("534004535430")
+    brain.play_note(octave, 2, short_note)  # e
+    time.sleep(short_pause / 1000)          # Pauza
 
-        playseq("3540345353400453")
+    brain.play_note(octave, 3, short_note)  # f
+    time.sleep(short_pause / 1000)          # Pauza
+
+    brain.play_note(octave, 4, medium_note) # g
+    time.sleep(medium_pause / 1000)         # Pauza
+
+    brain.play_note(octave, 5, short_note)  # a
+    time.sleep(short_pause / 1000)          # Pauza
+
+    brain.play_note(octave, 6, medium_note) # h
+    time.sleep(medium_pause / 1000)         # Pauza
+
+    brain.play_note(octave, 4, short_note)  # g
+    time.sleep(short_pause / 1000)          # Pauza
+
+    brain.play_note(octave, 3, short_note)  # f
+    time.sleep(short_pause / 1000)          # Pauza
+
+    brain.play_note(octave, 2, short_note)  # e
+    time.sleep(short_pause / 1000)          # Pauza
+
+    brain.play_note(octave, 0, long_note)   # c
+    time.sleep(long_pause / 1000)           # Pauza
+
+    brain.play_note(octave, 2, short_note)  # e
+    time.sleep(short_pause / 1000)          # Pauza
+
+    brain.play_note(octave, 4, medium_note) # g
+    time.sleep(medium_pause / 1000)         # Pauza
+
+    brain.play_note(octave, 5, short_note)  # a
+    time.sleep(short_pause / 1000)          # Pauza
+
+    brain.play_note(octave, 3, short_note)  # f
+    time.sleep(short_pause / 1000)          # Pauza
+
+    brain.play_note(octave, 2, short_note)  # e
+    time.sleep(short_pause / 1000)          # Pauza
+
+    brain.play_note(octave, 0, long_note)   # c
+    time.sleep(long_pause / 1000)           # Pauza
 
 genblock()
 
