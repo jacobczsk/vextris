@@ -211,6 +211,10 @@ velikost_bloku = 8
 def vykreslipole():
     """Vykresli staticke bloky (jiz spadle)"""
     global end
+    global score
+
+    brain.screen.print_at(score, x=0, y=105)
+
     if end: return
     for x in range(20):
         for y in range(10):
@@ -276,7 +280,6 @@ def vykresliblock(x_pos, y_pos, rotace):
                     herni_pole[idx-g] = herni_pole[idx-g-1]
                 herni_pole[0] = EMPTY
                 score += 1
-                print(str(score))
                 break
 
     for x in range(4):
@@ -364,55 +367,54 @@ controller.buttonRDown.released(buttonSlow)
 
 # END events
 def zvuk():
+    while True:
+        brain.play_note(octave, 0, short_note)  # c
+        time.sleep(short_pause / 1000)          # Pauza
 
-while True:
-    brain.play_note(octave, 0, short_note)  # c
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 2, short_note)  # e
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 2, short_note)  # e
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 3, short_note)  # f
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 3, short_note)  # f
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 4, medium_note) # g
+        time.sleep(medium_pause / 1000)         # Pauza
 
-    brain.play_note(octave, 4, medium_note) # g
-    time.sleep(medium_pause / 1000)         # Pauza
+        brain.play_note(octave, 5, short_note)  # a
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 5, short_note)  # a
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 6, medium_note) # h
+        time.sleep(medium_pause / 1000)         # Pauza
 
-    brain.play_note(octave, 6, medium_note) # h
-    time.sleep(medium_pause / 1000)         # Pauza
+        brain.play_note(octave, 4, short_note)  # g
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 4, short_note)  # g
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 3, short_note)  # f
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 3, short_note)  # f
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 2, short_note)  # e
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 2, short_note)  # e
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 0, long_note)   # c
+        time.sleep(long_pause / 1000)           # Pauza
 
-    brain.play_note(octave, 0, long_note)   # c
-    time.sleep(long_pause / 1000)           # Pauza
+        brain.play_note(octave, 2, short_note)  # e
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 2, short_note)  # e
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 4, medium_note) # g
+        time.sleep(medium_pause / 1000)         # Pauza
 
-    brain.play_note(octave, 4, medium_note) # g
-    time.sleep(medium_pause / 1000)         # Pauza
+        brain.play_note(octave, 5, short_note)  # a
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 5, short_note)  # a
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 3, short_note)  # f
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 3, short_note)  # f
-    time.sleep(short_pause / 1000)          # Pauza
+        brain.play_note(octave, 2, short_note)  # e
+        time.sleep(short_pause / 1000)          # Pauza
 
-    brain.play_note(octave, 2, short_note)  # e
-    time.sleep(short_pause / 1000)          # Pauza
-
-    brain.play_note(octave, 0, long_note)   # c
-    time.sleep(long_pause / 1000)           # Pauza
+        brain.play_note(octave, 0, long_note)   # c
+        time.sleep(long_pause / 1000)           # Pauza
 
 genblock()
 
